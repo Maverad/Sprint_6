@@ -1,4 +1,5 @@
 from locators import base_page_locators
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import helpers
@@ -7,7 +8,7 @@ import allure
 
 class BasePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver):
         self.driver = driver
 
     @allure.step('Клик по логотипу "Яндекс"')
@@ -25,6 +26,10 @@ class BasePage:
     @allure.step('Ожидание элемента')
     def wait_for_element(self, locator):
         WebDriverWait(self.driver, helpers.Timeouts.base_timeout).until(EC.visibility_of_element_located((locator)))
+
+    @allure.step('Ожидание открытия страницы яндекса')
+    def wait_for_yandex_page(self):
+        return self.wait_for_element(base_page_locators.yandex_page_search_input)
     
     @allure.step('Клик на элемент')
     def click_on_element(self, locator):
@@ -39,6 +44,11 @@ class BasePage:
     def input_text(self, locator, text):
         self.driver.find_element(*locator).send_keys(text)
     
-    @allure.step('')
     def check_visibility(self, locator):
         return self.driver.find_element(*locator).is_displayed()
+    
+    def find_elements(self, locator):
+        return self.driver.find_elements(*locator)
+    
+    def wait_for_already_known_element(self, element):
+        WebDriverWait(self.driver, helpers.Timeouts.base_timeout).until(EC.visibility_of(element))
