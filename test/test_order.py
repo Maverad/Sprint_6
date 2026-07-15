@@ -1,6 +1,6 @@
-import helpers
+import test_data
 from pages.order_page import OrderPage
-from helpers import OrderData as od
+from test_data import OrderData as od
 from locators import order_locators, main_page_locators
 import pytest
 import allure
@@ -17,7 +17,7 @@ class TestOrder:
         order.fill_entire_form(name=name, second_name=second_name, address=address,number=number)
         order.click_on_next_button()
         order.wait_for_last_order_screen()
-        order.fill_entire_hire_form(text=helpers.OrderData.text_for_comment)
+        order.fill_entire_hire_form(text=test_data.OrderData.text_for_comment)
         order.click_on_complete_button()
         order.wait_for_confirmation_screen()
         order.click_on_yes_button()

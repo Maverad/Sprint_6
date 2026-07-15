@@ -1,6 +1,5 @@
-from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
-from locators import base_page_locators, main_page_locators
+from locators import main_page_locators
 import allure
 
 
@@ -21,3 +20,4 @@ class MainPage(BasePage):
     @allure.step('Клик на принятие кук')
     def accept_all_cookie(self):
         self.click_on_element(main_page_locators.accept_cookie_button)
+

@@ -2,7 +2,7 @@ from locators import base_page_locators
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import helpers
+import test_data
 import allure
 
 
@@ -13,19 +13,19 @@ class BasePage:
 
     @allure.step('Клик по логотипу "Яндекс"')
     def click_on_yandex_logo(self):
-        self.driver.find_element(*base_page_locators.yandex_logo).click()
+        self.click_on_element(base_page_locators.yandex_logo)
 
     @allure.step('Клик по логотипу "Самокат"')
     def click_on_scooter_logo(self):
-        self.driver.find_element(*base_page_locators.scooter_logo).click()
+        self.click_on_element(base_page_locators.scooter_logo)
 
     @allure.step('Клик по кнопке "Заказать" в шапке страницы')
     def click_on_order_button(self):
-        self.driver.find_element(*base_page_locators.order_header_button).click()
+        self.click_on_element(base_page_locators.order_header_button)
 
     @allure.step('Ожидание элемента')
     def wait_for_element(self, locator):
-        WebDriverWait(self.driver, helpers.Timeouts.base_timeout).until(EC.visibility_of_element_located((locator)))
+        WebDriverWait(self.driver, test_data.Timeouts.base_timeout).until(EC.visibility_of_element_located((locator)))
 
     @allure.step('Ожидание открытия страницы яндекса')
     def wait_for_yandex_page(self):
@@ -51,4 +51,11 @@ class BasePage:
         return self.driver.find_elements(*locator)
     
     def wait_for_already_known_element(self, element):
-        WebDriverWait(self.driver, helpers.Timeouts.base_timeout).until(EC.visibility_of(element))
+        WebDriverWait(self.driver, test_data.Timeouts.base_timeout).until(EC.visibility_of(element))
+
+    def get_current_url(self):
+        return self.driver.current_url
+    
+    def switch_window(self, window):
+        self.driver.switch_to.window(self.driver.window_handles[window])
+

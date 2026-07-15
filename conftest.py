@@ -1,11 +1,11 @@
 import pytest
 from selenium import webdriver
-import helpers
+import test_data
 
 
 @pytest.fixture
 def driver():
     driver = webdriver.Firefox()
-    driver.get(helpers.Urls.main_url)
+    driver.get(test_data.Urls.main_url)
     yield driver
     driver.quit()

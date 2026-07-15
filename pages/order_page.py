@@ -1,41 +1,37 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from locators import order_locators
-from helpers import Timeouts
 from pages.base_page import BasePage
 import allure
-from selenium.webdriver.common.by import By
 
 
 class OrderPage(BasePage):
 
     @allure.step('Ожидание экрана заказа самоката')
     def wait_for_order_screen(self):
-        WebDriverWait(self.driver, Timeouts.base_timeout).until(EC.visibility_of_element_located((order_locators.order_name_input)))
+        self.wait_for_element(order_locators.order_name_input)
 
     @allure.step('Ожидание экрана деталей заказа')
     def wait_for_last_order_screen(self):
-        WebDriverWait(self.driver, Timeouts.base_timeout).until(EC.visibility_of_element_located((order_locators.order_complete_button)))
+        self.wait_for_element(order_locators.order_complete_button)
 
     @allure.step('Ожидание экрана статуса заказа')
     def wait_for_last_status_screen(self):
-        WebDriverWait(self.driver, Timeouts.base_timeout).until(EC.visibility_of_element_located((order_locators.order_status_button)))
+        self.wait_for_element(order_locators.order_status_button)
 
     @allure.step('Ожидание экрана подтверждения заказа')
     def wait_for_confirmation_screen(self):
-        WebDriverWait(self.driver, Timeouts.base_timeout).until(EC.visibility_of_element_located((order_locators.order_modal_confirmation_header)))
+        self.wait_for_element(order_locators.order_modal_confirmation_header)
 
     @allure.step('Заполнение поля "Имя"')
     def fill_name_input(self, name):
-        self.driver.find_element(*order_locators.order_name_input).send_keys(name)
+        self.input_text(order_locators.order_name_input, name)
 
     @allure.step('Заполнение поля "Фамилия"')
     def fill_secondname_input(self, second_name):
-        self.driver.find_element(*order_locators.order_second_name_input).send_keys(second_name)
+        self.input_text(order_locators.order_second_name_input, second_name)
 
     @allure.step('Заполнение поля "Адрес"')
     def fill_address_input(self, address):
-        self.driver.find_element(*order_locators.order_address_input).send_keys(address)
+        self.input_text(order_locators.order_address_input, address)
 
     @allure.step('Выбор станции метро')
     def choose_metro_station(self):
@@ -45,11 +41,11 @@ class OrderPage(BasePage):
 
     @allure.step('Заполнение поля "Телефон"')
     def fill_number_imput(self, number):
-        self.driver.find_element(*order_locators.order_number_input).send_keys(number)
+        self.input_text(order_locators.order_number_input, number)
 
     @allure.step('Клик на кнопку "Далее"')
     def click_on_next_button(self):
-        self.driver.find_element(*order_locators.order_next_button).click()
+        self.click_on_element(order_locators.order_next_button)
 
     @allure.step('Заполнение даты доставки')
     def fill_delivery_date(self):

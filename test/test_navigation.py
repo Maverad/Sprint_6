@@ -17,8 +17,8 @@ class TestNavigation:
     def test_navigation_main_page_yandex_logo(self, driver):
         main = MainPage(driver)
         main.click_on_yandex_logo()
-        driver.switch_to.window(driver.window_handles[-1])
+        main.switch_window(-1)
         main.wait_for_element(base_page_locators.yandex_page_search_input)
 
-        assert 'ya.ru' in driver.current_url
+        assert 'ya.ru' in main.get_current_url()
 

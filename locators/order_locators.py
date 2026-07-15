@@ -12,7 +12,7 @@ order_metro_station_choose = (By.XPATH, ".//div[@class='select-search__select']/
 
 #second form - hire details
 order_delivery_date_calendar_open = (By.XPATH, ".//input[@placeholder='* Когда привезти самокат']")
-order_delivery_date_choose = (By.XPATH, ".//div[@class='react-datepicker__day react-datepicker__day--016']")
+order_delivery_date_choose = (By.XPATH, ".//div[@class='react-datepicker__day react-datepicker__day--015']")
 order_hire_time_dropdown = (By.XPATH, ".//span[@class='Dropdown-arrow']")
 order_hire_time_choose = (By.XPATH, ".//div[@class='Dropdown-option' and text()='трое суток']")
 order_black_scooter_checkbox = (By.XPATH, ".//input[@id='black']")
