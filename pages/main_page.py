@@ -15,7 +15,7 @@ class MainPage(BasePage):
 
     @allure.step('Скролл до вопросов о важном')
     def scroll_to_main_questions(self):
-        self.scroll_to_element(main_page_locators.questions_first_question)
+        self.scroll_to_element(main_page_locators.questions[0])
 
     @allure.step('Клик на принятие кук')
     def accept_all_cookie(self):
