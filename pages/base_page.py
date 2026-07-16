@@ -50,6 +50,9 @@ class BasePage:
     def find_elements(self, locator):
         return self.driver.find_elements(*locator)
     
+    def find_element(self, locator):
+        return self.driver.find_element(*locator)
+    
     def wait_for_already_known_element(self, element):
         WebDriverWait(self.driver, test_data.Timeouts.base_timeout).until(EC.visibility_of(element))
 
@@ -59,3 +62,5 @@ class BasePage:
     def switch_window(self, window):
         self.driver.switch_to.window(self.driver.window_handles[window])
 
+    def get_text_of_the_element(self, locator):
+        return self.find_element(locator).text
